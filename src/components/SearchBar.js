@@ -1,24 +1,31 @@
 import { useState } from "react";
-function SearchBar({onSubmit}) {
+function SearchBar({ onSubmit }) {
 
     const [term, setTerm] = useState('')
+    const [changedText, setChangedText] = useState(false)
 
-
-    const handleFormSubmit = (event) =>{
+    const handleFormSubmit = (event) => {
         event.preventDefault()
-        onSubmit(term)
+        // onSubmit(term)
     }
-    const handleChange = (event) =>{
+    const handleChange = (event) => {
         console.log(event.target.value);
         setTerm(event.target.value)
     }
+    const handleClick = (event) => {
+        // console.log(event.target.value);
+        // setTerm(event.target.value)
+        setChangedText(true)
+    }
     return (
         <div>
-            SearchBar
+            <h2>SearchBar</h2>
             <form onSubmit={handleFormSubmit}>
                 Confim your search: {term} <br />
-                <input onChange={handleChange}/>
-                {/* <button onClick={handleClick}>Click</button> */}
+                {!changedText && <p>Good to see you</p> }
+                {changedText && <p>Nice to see you</p>}
+                <input onChange={handleChange} />
+                <button onClick={handleClick}>Click</button>
             </form>
         </div>
     )
